@@ -43,6 +43,11 @@ Multi Entry points:
 const SingleSpaGenerateImports = require('single-spa-generate-imports-webpack');
 // ...
   module: {
+    entry: {
+      'hulk-styleguide': `./src/main.ts`,
+      'styles': `./src/css/styles.ts`,
+    }
+    ...
     plugins: [
       new SingleSpaGenerateImports({
         packageName: {
