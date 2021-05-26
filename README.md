@@ -25,6 +25,7 @@ const SingleSpaGenerateImports = require('single-spa-generate-imports-webpack');
   },
 // ...
 ```
+
 Generate file:
 
 ``` javascript
@@ -36,3 +37,34 @@ Generate file:
 }
 ```
 
+Multi Entry points:
+
+``` javascript
+const SingleSpaGenerateImports = require('single-spa-generate-imports-webpack');
+// ...
+  module: {
+    plugins: [
+      new SingleSpaGenerateImports({
+        packageName: {
+          'hulk-styleguide': '@hulk/styleguide',
+          'styles': '@hulk/styleguide/styles',
+          ...
+        }
+        ...
+      }),
+    ]
+  },
+// ...
+```
+Generate file multi imports:
+
+``` javascript
+// dist/importmap.json
+{
+  imports: {
+    "@hulk/styleguide": "http://some.url/point/to/your/import/path/hulk-styleguide.<hash>.js"
+    "@hulk/styleguide/styles": "http://some.url/point/to/your/import/path/styles.<hash>.js"
+    ...
+  }
+}
+```
