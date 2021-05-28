@@ -44,10 +44,7 @@ module.exports = class SingleSpaGenerateImports {
             (item) => item.startsWith(name) && item.endsWith(".js")
           );
           if (filename) {
-            importmap.imports[this.options.packageName[name]] = path.join(
-              staticPath,
-              filename
-            );
+            importmap.imports[this.options.packageName[name]] = joinURL(staticPath, filename);
           }
         });
       } else {
