@@ -8,19 +8,32 @@ const joinURL = (baseUrl = '', filename = '') => {
   const name = filename.startsWith('/') ? filename.substring(1, filename.length) : filename;
   return base + '/' + name;
 }
+const isDisabled = (compilerOptions) => {
+  return compilerOptions.mode !== 'production'
+}
+
 module.exports = class SingleSpaGenerateImports {
   static defaultOptions = {
     packageName: null,
     staticPath: process.env.STATIC_PATH,
     filename: "importmap.json",
+    isDisabled,
   };
 
   constructor(options = {}) {
     this.options = { ...SingleSpaGenerateImports.defaultOptions, ...options };
-    console.log();
   }
   apply(compiler) {
     compiler.hooks.done.tap(pluginName, ({ compilation }) => {
+      let isBypassed = false;
+      if (typeof this.options.isDisabled === 'boolean') {
+        isBypassed = this.options.isDisabled
+      }
+      if (typeof isDisabled === 'function') {
+        isBypassed = this.options.isDisabled(compilation.compiler.options)
+      }
+      if (isBypassed) return
+
       const staticPath = this.options.staticPath || process.env.STATIC_PATH;
       const outputPath = compilation.outputOptions.path;
 
