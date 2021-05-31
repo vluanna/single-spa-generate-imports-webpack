@@ -1,6 +1,6 @@
 {
   "name": "single-spa-generate-imports-webpack",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A webpack plugin which allow to generate importmap.json with output filename for single-spa application on compile",
   "main": "index.js",
   "repository": {
