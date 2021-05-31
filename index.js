@@ -36,10 +36,12 @@ module.exports = class SingleSpaGenerateImports {
 
       const staticPath = this.options.staticPath || process.env.STATIC_PATH;
       const outputPath = compilation.outputOptions.path;
-
-      if (!this.options.packageName || !staticPath) {
+      if(!staticPath) {
+        return console.warn('"staticPath" not found, ' + pluginName + ' plugin is disabled by default.')
+      }
+      if (!this.options.packageName ) {
         throw new Error(
-          pluginName + ': "packageName" and "staticPath" options are required!'
+          pluginName + ': "packageName" options are required!'
         );
       }
       const importmap = {};
