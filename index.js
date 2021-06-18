@@ -36,10 +36,10 @@ module.exports = class SingleSpaGenerateImports {
 
       const staticPath = this.options.staticPath || process.env.STATIC_PATH;
       const outputPath = compilation.outputOptions.path;
-      if(!staticPath) {
+      if (!staticPath) {
         return console.warn('"staticPath" not found, ' + pluginName + ' plugin is disabled by default.')
       }
-      if (!this.options.packageName ) {
+      if (!this.options.packageName) {
         throw new Error(
           pluginName + ': "packageName" options are required!'
         );
@@ -48,7 +48,8 @@ module.exports = class SingleSpaGenerateImports {
       const assets = Array.from(compilation.assetsInfo.keys());
 
       if (typeof this.options.packageName === "string") {
-        const filename = assets.find((item) => item.endsWith(".js"));
+        const orgName = this.options.packageName.split('/')[0] && this.options.packageName.split('/')[0].replace('@', '')
+        const filename = assets.find((item) => item.endsWith(".js") && item.startsWith(orgName));
         importmap.imports = {
           [this.options.packageName]: joinURL(staticPath, filename),
         };
