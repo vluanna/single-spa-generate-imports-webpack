@@ -17,7 +17,7 @@ const SingleSpaGenerateImports = require('single-spa-generate-imports-webpack');
   module: {
     plugins: [
       new SingleSpaGenerateImports({
-        packageName: '@hulk/core', // required
+        packageName: '@org/core', // required
         staticPath: 'http://some.url/point/to/your/import/path', // default from env process.env.STATIC_PATH
         filename: 'importmap.json'
       }),
@@ -32,7 +32,7 @@ Generate file:
 // dist/importmap.json
 {
   imports: {
-    "@hulk/core": "http://some.url/point/to/your/import/path/hulk-core.<hash>.js"
+    "@org/core": "http://some.url/point/to/your/import/path/org-core.<hash>.js"
   }
 }
 ```
@@ -44,15 +44,15 @@ const SingleSpaGenerateImports = require('single-spa-generate-imports-webpack');
 // ...
   module: {
     entry: {
-      'hulk-styleguide': `./src/main.ts`,
+      'org-styleguide': `./src/main.ts`,
       'styles': `./src/styles.ts`,
     }
     ...
     plugins: [
       new SingleSpaGenerateImports({
         packageName: {
-          'hulk-styleguide': '@hulk/styleguide',
-          'styles': '@hulk/styleguide/styles',
+          'org-styleguide': '@org/styleguide',
+          'styles': '@org/styleguide/styles',
           ...
         }
         ...
@@ -67,8 +67,8 @@ Generate file multi imports:
 // dist/importmap.json
 {
   imports: {
-    "@hulk/styleguide": "http://some.url/point/to/your/import/path/hulk-styleguide.<hash>.js"
-    "@hulk/styleguide/styles": "http://some.url/point/to/your/import/path/styles.<hash>.js"
+    "@org/styleguide": "http://some.url/point/to/your/import/path/org-styleguide.<hash>.js"
+    "@org/styleguide/styles": "http://some.url/point/to/your/import/path/styles.<hash>.js"
     ...
   }
 }
